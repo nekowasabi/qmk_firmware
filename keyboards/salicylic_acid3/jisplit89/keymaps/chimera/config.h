@@ -24,23 +24,15 @@
 
 #define LAYER_STATE_16BIT
 
-//#define USE_MATRIX_I2C
-
-/* Select hand configuration */
-
 #define MASTER_LEFT
 #define MASTER_RIGHT
-// #define EE_HANDS
-
-// #define USE_SERIAL_PD2
 
 #define TAP_CODE_DELAY 1
 #define TAPPING_TERM 150
 #define RETRO_TAPPING
 #define PERMISSIVE_HOLD
 
-
-// #define USB_MAX_POWER_CONSUMPTION 500
+#define USB_MAX_POWER_CONSUMPTION 100
 
 // RGB Settings.
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS

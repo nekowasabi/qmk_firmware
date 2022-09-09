@@ -16,6 +16,7 @@
    */
 
 #include "keycode.h"
+#include "keycode_legacy.h"
 #include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 #include "keymap_japanese.h"
@@ -32,7 +33,7 @@ enum layer_number {
   _O_DFT,
   _O_MOD_INPUT,
   _O_MOD,
-  _TK_L,
+  _TK_LFT,
 };
 
 enum custom_keycodes {
@@ -44,52 +45,54 @@ enum custom_keycodes {
   KC_O_TOGGL,
   KC_O_OFF,
   KC_VIM_OFF,
+  KC_WORD_LEFT,
+  KC_WORD_RIGHT,
 
-  TK_L_Q,
-  TK_L_W,
-  TK_L_E,
-  TK_L_R,
-  TK_L_T,
-  TK_L_Y,
-  TK_L_U,
-  TK_L_I,
-  TK_L_O,
-  TK_L_P,
-  TK_L_A,
-  TK_L_S,
-  TK_L_D,
-  TK_L_F,
-  TK_L_G,
-  TK_L_H,
-  TK_L_J,
-  TK_L_K,
-  TK_L_L,
-  TK_L_SCLN,
-  TK_L_Z,
-  TK_L_X,
-  TK_L_C,
-  TK_L_V,
-  TK_L_B,
-  TK_L_N,
-  TK_L_M,
-  TK_L_COMM,
-  TK_L_DOT,
-  TK_L_SLSH,
-  TK_L_1,
-  TK_L_2,
-  TK_L_3,
-  TK_L_4,
-  TK_L_5,
-  TK_L_6,
-  TK_L_7,
-  TK_L_8,
-  TK_L_9,
-  TK_L_0,
-  TK_L_AT,
-  TK_L_LBRC,
-  TK_L_COLN,
-  TK_L_RBRC,
-  TK_L_BSLS,
+  TK_LFT_Q,
+  TK_LFT_W,
+  TK_LFT_E,
+  TK_LFT_R,
+  TK_LFT_T,
+  TK_LFT_Y,
+  TK_LFT_U,
+  TK_LFT_I,
+  TK_LFT_O,
+  TK_LFT_P,
+  TK_LFT_A,
+  TK_LFT_S,
+  TK_LFT_D,
+  TK_LFT_F,
+  TK_LFT_G,
+  TK_LFT_H,
+  TK_LFT_J,
+  TK_LFT_K,
+  TK_LFT_L,
+  TK_LFT_SCLN,
+  TK_LFT_Z,
+  TK_LFT_X,
+  TK_LFT_C,
+  TK_LFT_V,
+  TK_LFT_B,
+  TK_LFT_N,
+  TK_LFT_M,
+  TK_LFT_COMM,
+  TK_LFT_DOT,
+  TK_LFT_SLSH,
+  TK_LFT_1,
+  TK_LFT_2,
+  TK_LFT_3,
+  TK_LFT_4,
+  TK_LFT_5,
+  TK_LFT_6,
+  TK_LFT_7,
+  TK_LFT_8,
+  TK_LFT_9,
+  TK_LFT_0,
+  TK_LFT_AT,
+  TK_LFT_LBRC,
+  TK_LFT_COLN,
+  TK_LFT_RBRC,
+  TK_LFT_BSLS,
 };
 
 #define XXXXX KC_NO
@@ -121,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
       KC_O_OFF,   NG_A,    NG_S,    NG_D,    NG_F,    NG_G,        NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, NG_COLN, NG_RBRC,           KC_END,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      KC_LSFT,   OSL(_TK_L),    NG_X,    NG_C,    NG_V,    NG_B,        NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, NG_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
+      KC_LSFT,   OSL(_TK_LFT),    NG_X,    NG_C,    NG_V,    NG_B,        NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, NG_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
       KC_LCTRL, KC_LGUI, KC_LALT,   KC_LCTRL,  NG_SHFTL, KC_O_MOD, NG_SHFTR,  LCTL_T(KC_ENT), KC_BSPC, KC_DEL,  KC_O_OFF,          KC_LEFT, KC_DOWN,KC_RIGHT
       //`-----------------------------------------------------|   |--------------------------------------------------------------------------------'
@@ -135,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
       KC_TAB,    KC_Q,    JP_YEN,    LSFT(JP_BSLS),    LSFT(KC_4),    KC_T,        KC_Y,    KC_HOME,    KC_PGUP,    KC_O,    KC_P,   JP_AT, JP_LBRC,  KC_ENT, KC_HOME,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      KC_CAPS,    LSFT(JP_MINS),    LSFT(KC_2),    LSFT(KC_7),    LSFT(KC_8),    LSFT(JP_LBRC),        KC_LBRC,    JP_MINS,    KC_UP,    KC_RIGHT, JP_SCLN, JP_COLN, JP_RBRC,           KC_END,
+      KC_CAPS,    LSFT(JP_MINS),    LSFT(KC_2),    LSFT(KC_7),    LSFT(KC_8),    LSFT(JP_LBRC),        JP_LBRC,    JP_MINS,    KC_UP,    KC_RIGHT, JP_SCLN, JP_COLN, JP_RBRC,           KC_END,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
          KC_LSFT,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7, KC_8,  KC_9, KC_0, JP_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
@@ -151,9 +154,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_HOME,    KC_PGUP,    KC_O,    KC_P,   JP_AT, JP_LBRC,  KC_ENT, KC_HOME,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_CAPS,    KC_A,    KC_S,    KC_D,    KC_F,    KC_VIM_OFF,        KC_LEFT,    KC_DOWN,    KC_UP,    KC_RIGHT, LCTL(KC_LEFT), LCTL(KC_RIGHT), JP_RBRC,           KC_END,
+      KC_CAPS,    LSFT(KC_LEFT),    LSFT(KC_DOWN),    LSFT(KC_UP),    LSFT(KC_RIGHT),    KC_VIM_OFF,        KC_LEFT,    KC_DOWN,    KC_UP,    KC_RIGHT, KC_WORD_LEFT, KC_WORD_RIGHT, JP_RBRC,           KC_END,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_END, KC_PGDN,  KC_DOT, KC_SLSH, JP_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
+      KC_LSFT,    KC_Z,    LCTL(KC_X),    LCTL(KC_C),    LCTL(KC_V),    KC_B,        KC_N,    KC_END, KC_PGDN,  KC_DOT, KC_SLSH, JP_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
          KC_LCTRL, KC_LGUI, KC_LALT,   KC_LCTRL,  KC_O_MOD_INPUT,  KC_O_MOD,    KC_SPC,  LCTL_T(KC_ENT), KC_BSPC, KC_KANA,  KC_O_TOGGL,   KC_LEFT,  KC_DOWN,  KC_RIGHT
       //`----------------------------------------------------------|   |--------------------------------------------------------------------------------'
@@ -161,17 +164,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-  [_TK_L] = LAYOUT(
+  [_TK_LFT] = LAYOUT(
       //,----------------------------------------------------------|   |--------------------------------------------------------------------------------.
       KC_ESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_INS, KC_PSCR,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_ZKHK,  TK_L_1,  TK_L_2,    TK_L_3,    TK_L_4,    TK_L_5,        TK_L_6,    TK_L_7,    TK_L_8,    TK_L_9,    TK_L_0, JP_MINS, JP_CIRC,  JP_YEN, KC_BSPC,  KC_DEL,
+      KC_ZKHK,  TK_LFT_1,  TK_LFT_2,    TK_LFT_3,    TK_LFT_4,    TK_LFT_5,        TK_LFT_6,    TK_LFT_7,    TK_LFT_8,    TK_LFT_9,    TK_LFT_0, JP_MINS, JP_CIRC,  JP_YEN, KC_BSPC,  KC_DEL,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_TAB,    TK_L_Q,    TK_L_W,    TK_L_E,    TK_L_R,    TK_L_T,        TK_L_Y,    TK_L_U,    TK_L_I,    TK_L_O,    TK_L_P,   TK_L_AT, TK_L_LBRC,  KC_ENT, KC_HOME,
+      KC_TAB,    TK_LFT_Q,    TK_LFT_W,    TK_LFT_E,    TK_LFT_R,    TK_LFT_T,        TK_LFT_Y,    TK_LFT_U,    TK_LFT_I,    TK_LFT_O,    TK_LFT_P,   TK_LFT_AT, TK_LFT_LBRC,  KC_ENT, KC_HOME,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_CAPS,    TK_L_A,    TK_L_S,    TK_L_D,    TK_L_F,    TK_L_G,        TK_L_H,    TK_L_J,    TK_L_K,    TK_L_L, TK_L_SCLN, TK_L_COLN, TK_L_RBRC,           KC_END,
+      KC_CAPS,    TK_LFT_A,    TK_LFT_S,    TK_LFT_D,    TK_LFT_F,    TK_LFT_G,        TK_LFT_H,    TK_LFT_J,    TK_LFT_K,    TK_LFT_L, TK_LFT_SCLN, TK_LFT_COLN, TK_LFT_RBRC,           KC_END,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_LSFT,    TK_L_Z,    TK_L_X,    TK_L_C,    TK_L_V,    TK_L_B,        TK_L_N,    TK_L_M, TK_L_COMM,  TK_L_DOT, TK_L_SLSH, TK_L_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
+      KC_LSFT,    TK_LFT_Z,    TK_LFT_X,    TK_LFT_C,    TK_LFT_V,    TK_LFT_B,        TK_LFT_N,    TK_LFT_M, TK_LFT_COMM,  TK_LFT_DOT, TK_LFT_SLSH, TK_LFT_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
          KC_LCTRL, KC_LGUI, KC_LALT,   KC_LCTRL,  KC_O_MOD_INPUT,  KC_O_MOD,    KC_SPC,  LCTL_T(KC_ENT), KC_BSPC, KC_KANA,  KC_O_TOGGL,   KC_LEFT,  KC_DOWN,  KC_RIGHT
       //`----------------------------------------------------------|   |--------------------------------------------------------------------------------'
@@ -223,10 +226,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         if (nicola_state() == true) {
           nicola_off();
-          register_code(KC_LSFT);
+          register_code(KC_LCTRL);
           register_code(KC_F12);
           unregister_code(KC_F12);
-          unregister_code(KC_LSFT);
+          unregister_code(KC_LCTRL);
         } else {
           nicola_on();
           register_code(KC_LSFT);
@@ -241,10 +244,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_O_OFF:
       if (record->event.pressed) {
         nicola_off();
-        register_code(KC_LSFT);
+        register_code(KC_LCTRL);
         register_code(KC_F12);
         unregister_code(KC_F12);
-        unregister_code(KC_LSFT);
+        unregister_code(KC_LCTRL);
       }
       return false;
       break;
@@ -253,339 +256,363 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         nicola_off();
         register_code(KC_ESC);
         unregister_code(KC_ESC);
-        register_code(KC_LSFT);
+        register_code(KC_LCTRL);
         register_code(KC_F12);
         unregister_code(KC_F12);
-        unregister_code(KC_LSFT);
+        unregister_code(KC_LCTRL);
       }
       return false;
       break;
-    case TK_L_A:
+    case KC_WORD_LEFT:
+      if (record->event.pressed) {
+        register_code(KC_LCTRL);
+        register_code(KC_LEFT);
+        unregister_code(KC_LEFT);
+        register_code(KC_LEFT);
+        unregister_code(KC_LEFT);
+        unregister_code(KC_LCTRL);
+      }
+      return false;
+      break;
+    case KC_WORD_RIGHT:
+      if (record->event.pressed) {
+        register_code(KC_LCTRL);
+        register_code(KC_RIGHT);
+        unregister_code(KC_RIGHT);
+        register_code(KC_RIGHT);
+        unregister_code(KC_RIGHT);
+        unregister_code(KC_LCTRL);
+      }
+      return false;
+      break;
+
+    case TK_LFT_A:
       if (record->event.pressed) {
         send_string("ohayou");
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_B:
+    case TK_LFT_B:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_C:
+    case TK_LFT_C:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_D:
+    case TK_LFT_D:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_E:
+    case TK_LFT_E:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_F:
+    case TK_LFT_F:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_G:
+    case TK_LFT_G:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_H:
+    case TK_LFT_H:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_I:
+    case TK_LFT_I:
+      if (record->event.pressed) {
+        send_string("itada");
+      } else {
+        layer_off(_TK_LFT);
+      }
+      return false;
+      break;
+    case TK_LFT_J:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_J:
+    case TK_LFT_K:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_K:
+    case TK_LFT_L:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_L:
-      if (record->event.pressed) {
-      } else {
-        layer_off(_TK_L);
-      }
-      return false;
-      break;
-    case TK_L_M:
+    case TK_LFT_M:
       if (record->event.pressed) {
         send_string("makako");
         SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_N:
+    case TK_LFT_N:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_O:
+    case TK_LFT_O:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_P:
+    case TK_LFT_P:
       if (record->event.pressed) {
         send_string("nakaguro");
         SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_Q:
+    case TK_LFT_Q:
       if (record->event.pressed) {
         SEND_STRING("bo" SS_TAP(X_SPACE) SS_TAP(X_ENTER));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_R:
+    case TK_LFT_R:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_S:
+    case TK_LFT_S:
       if (record->event.pressed) {
         send_string("su");
         SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_T:
+    case TK_LFT_T:
       if (record->event.pressed) {
         SEND_STRING("ten" SS_TAP(X_SPACE) SS_TAP(X_ENTER));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_U:
+    case TK_LFT_U:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_V:
+    case TK_LFT_V:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_W:
+    case TK_LFT_W:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_X:
+    case TK_LFT_X:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_Y:
+    case TK_LFT_Y:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_Z:
+    case TK_LFT_Z:
       if (record->event.pressed) {
         send_string("pa");
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_1:
+    case TK_LFT_1:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_2:
+    case TK_LFT_2:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_3:
+    case TK_LFT_3:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_4:
+    case TK_LFT_4:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_5:
+    case TK_LFT_5:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_6:
+    case TK_LFT_6:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_7:
+    case TK_LFT_7:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_8:
+    case TK_LFT_8:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_9:
+    case TK_LFT_9:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_0:
+    case TK_LFT_0:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_AT:
+    case TK_LFT_AT:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_LBRC:
+    case TK_LFT_LBRC:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_SCLN:
+    case TK_LFT_SCLN:
       if (record->event.pressed) {
         send_string("ikako");
         SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_COLN:
+    case TK_LFT_COLN:
       if (record->event.pressed) {
         send_string("nikako");
         SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_RBRC:
+    case TK_LFT_RBRC:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_COMM:
+    case TK_LFT_COMM:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_DOT:
+    case TK_LFT_DOT:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_SLSH:
+    case TK_LFT_SLSH:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
-    case TK_L_BSLS:
+    case TK_LFT_BSLS:
       if (record->event.pressed) {
       } else {
-        layer_off(_TK_L);
+        layer_off(_TK_LFT);
       }
       return false;
       break;
@@ -601,12 +628,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-// 有効にするとCTRL時に親指シフトモードが解除されてしまうのでコメントアウト
-// bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-//   switch (keycode) {
-//     case LCTL_T(KC_ENT):
-//       return true;
-//     default:
-//       return false;
-//   }
-// }

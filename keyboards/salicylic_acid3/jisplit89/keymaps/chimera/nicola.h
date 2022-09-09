@@ -17,7 +17,6 @@
 void nicola_type(void);
 void nicola_clear(void);
 
-// void nicola_mode(uint16_t, keyrecord_t *);
 bool process_modifier(uint64_t, keyrecord_t *);
 
 void nicola_on(void);
