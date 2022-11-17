@@ -14,8 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "action_util.h"
 #include QMK_KEYBOARD_H
 #include "nicola.h"
+#include <unistd.h>
 
 #if !defined(__AVR__)
   #include <string.h>
@@ -159,6 +161,8 @@ typedef struct {
 
 const PROGMEM nicola_keymap ngmap[] = {
   // 同時
+  {.key = B_S|B_D|B_F       , .kana = "aaaaaaaaa"},
+
   {.key = B_A|B_9           , .kana = "atari"},
   {.key = B_A|B_Y           , .kana = "atte"},
   {.key = B_A|B_U           , .kana = "atta"},
@@ -174,12 +178,10 @@ const PROGMEM nicola_keymap ngmap[] = {
 
   {.key = B_C|B_V           , .kana = "youni"},
 
-  {.key = B_S|B_D|B_F           , .kana = "aaaa"},
-
   {.key = B_D|B_7           , .kana = "simai"},
   {.key = B_D|B_8           , .kana = "yuru"},
   {.key = B_D|B_9           , .kana = "dekireba"},
-  {.key = B_D|B_0           , .kana = "tudu"},
+  {.key = B_D|B_0           , .kana = "dekinai"},
   {.key = B_D|B_Y           , .kana = "datte"},
   {.key = B_D|B_U           , .kana = "dou"},
   {.key = B_D|B_I           , .kana = "dasu"},
@@ -199,13 +201,11 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_D|B_COMM            , .kana = "yori"},
   {.key = B_D|B_DOT            , .kana = "you"},
   {.key = B_D|B_SLSH            , .kana = "noni"},
-  {.key = B_D|B_BSLS            , .kana = "dekite"},
 
   {.key = B_E|B_I            , .kana = "ite"},
   {.key = B_E|B_O            , .kana = "kyou"},
   {.key = B_E|B_AT            , .kana = "kyuu"},
   {.key = B_E|B_J            , .kana = "dete"},
-  {.key = B_E|B_K            , .kana = "kite"},
   {.key = B_E|B_L            , .kana = "mite"},
 
   {.key = B_G|B_Y            , .kana = "gyaku"},
@@ -235,7 +235,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_I|B_E            , .kana = "ite"},
   {.key = B_I|B_R            , .kana = "iru"},
   {.key = B_I|B_O            , .kana = "nai"},
-  // {.key = B_I|B_Z            , .kana = "ireba"},
+  {.key = B_I|B_B            , .kana = "ireba"},
 
   {.key = B_J|B_I            , .kana = "teru"},
   {.key = B_J|B_O            , .kana = "siyou"},
@@ -261,8 +261,9 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_K|B_C            , .kana = "kite"},
   {.key = B_K|B_B            , .kana = "kuru"},
   {.key = B_K|B_M            , .kana = "mae"},
+  {.key = B_K|B_N            , .kana = "kakuninn"},
 
-  {.key = B_L|B_COLN         , .kana = "inai"},
+  {.key = B_L|B_SCLN         , .kana = "inai"},
 
   {.key = B_M|B_2            , .kana = "motta"},
   {.key = B_M|B_3            , .kana = "motte"},
@@ -292,7 +293,6 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_N|B_D            , .kana = "nanoni"},
   {.key = B_N|B_F            , .kana = "nanoka"},
   {.key = B_N|B_G            , .kana = "nakereba"},
-  // {.key = B_N|B_Z            , .kana = "nanode"},
   {.key = B_N|B_X            , .kana = "nano"},
   {.key = B_N|B_B            , .kana = "node"},
 
@@ -308,7 +308,8 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_R|B_I            , .kana = "koto"},
   {.key = B_R|B_O            , .kana = "rou"},
   {.key = B_R|B_P            , .kana = "naku"},
-  {.key = B_R|B_AT            , .kana = "rya"},
+  {.key = B_R|B_AT           , .kana = "rya"},
+  {.key = B_R|B_LBRC         , .kana = "ryu"},
   {.key = B_R|B_G            , .kana = "nagare"},
   {.key = B_R|B_H            , .kana = "reba"},
   {.key = B_R|B_J            , .kana = "deru"},
@@ -344,7 +345,6 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_S|B_COMM         , .kana = "syou"},
   {.key = B_S|B_DOT          , .kana = "syuu"},
   {.key = B_S|B_SLSH         , .kana = "sure"},
-  {.key = B_S|B_BSLS         , .kana = "sete"},
 
   {.key = B_T|B_O         , .kana = "toka"},
   {.key = B_T|B_P         , .kana = "tyu"},
@@ -359,11 +359,11 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_T|B_SLSH      , .kana = "tyo"},
   {.key = B_T|B_BSLS      , .kana = "tyu"},
 
-
   {.key = B_U|B_Y      , .kana = "yuku"},
   {.key = B_U|B_I      , .kana = "iku"},
   {.key = B_U|B_O      , .kana = "tuite"},
-  // {.key = B_U|B_Z      , .kana = "zou"},
+
+  {.key = B_V|B_B      , .kana = "youna"},
 
   {.key = B_W|B_7      , .kana = "wareta"},
   {.key = B_W|B_8      , .kana = "warete"},
@@ -375,7 +375,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_W|B_P      , .kana = "rase"},
   {.key = B_W|B_H      , .kana = "wara"},
   {.key = B_W|B_J      , .kana = "wari"},
-
+  {.key = B_W|B_L      , .kana = "wake"},
   
   {.key = B_X|B_7      , .kana = "suu"},
   {.key = B_X|B_8      , .kana = "huu"},
@@ -387,19 +387,18 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_X|B_O      , .kana = "ou"},
   {.key = B_X|B_P      , .kana = "pou"},
   {.key = B_X|B_AT     , .kana = "gou"},
+  {.key = B_X|B_LBRC   , .kana = "tukete"},
   {.key = B_X|B_H      , .kana = "hou"},
   {.key = B_X|B_J      , .kana = "deha"},
   {.key = B_X|B_L      , .kana = "teki"},
-  {.key = B_X|B_SCLN      , .kana = "tuku"},
-  {.key = B_X|B_COLN      , .kana = "tuke"},
-  {.key = B_X|B_RBRC      , .kana = "tuketa"},
-  // {.key = B_X|B_Z      , .kana = "sere"},
+  {.key = B_X|B_SCLN   , .kana = "tuku"},
+  {.key = B_X|B_COLN   , .kana = "tuke"},
+  {.key = B_X|B_RBRC   , .kana = "tuketa"},
   {.key = B_X|B_C      , .kana = "seru"},
   {.key = B_X|B_V      , .kana = "saku"},
   {.key = B_X|B_M      , .kana = "oku"},
   {.key = B_X|B_DOT      , .kana = "rou"},
   {.key = B_X|B_SLSH      , .kana = "tukeru"},
-  {.key = B_X|B_BSLS      , .kana = "tukete"},
 
   {.key = B_Y|B_1      , .kana = "yorosii"},
   {.key = B_Y|B_2      , .kana = "yotta"},
@@ -421,6 +420,25 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SCLN|B_1      , .kana = "!"},
   {.key = B_SCLN|B_2      , .kana = "?"},
 
+  {.key = B_BSLS|B_1      , .kana = "kyuu"},
+  {.key = B_BSLS|B_2      , .kana = "kyou"},
+  {.key = B_BSLS|B_3      , .kana = "kya"},
+  {.key = B_BSLS|B_4      , .kana = "kyu"},
+  {.key = B_BSLS|B_5      , .kana = "kyo"},
+  {.key = B_BSLS|B_Q      , .kana = "myuu"},
+  {.key = B_BSLS|B_W      , .kana = "myou"},
+  {.key = B_BSLS|B_E      , .kana = "tyuu"},
+  {.key = B_BSLS|B_R      , .kana = "tyou"},
+  {.key = B_BSLS|B_T      , .kana = "tyo"},
+  {.key = B_BSLS|B_A      , .kana = "byuu"},
+  {.key = B_BSLS|B_S      , .kana = "byou"},
+  {.key = B_BSLS|B_D      , .kana = "hyou"},
+  {.key = B_BSLS|B_F      , .kana = "hyuu"},
+  {.key = B_BSLS|B_G      , .kana = "rya"},
+  {.key = B_BSLS|B_X      , .kana = "gyuu"},
+  {.key = B_BSLS|B_C      , .kana = "gyou"},
+  {.key = B_BSLS|B_V      , .kana = "nyuu"},
+  {.key = B_BSLS|B_B      , .kana = "nyou"},
                                                          
   // 単独
   {.key = B_Q               , .kana = "na"},
@@ -477,10 +495,6 @@ const PROGMEM nicola_keymap ngmap[] = {
   // {.key = B_SHFTL           , .kana = " "},
   {.key = B_SHFTR           , .kana = " "},
 
-  // Shift and Henkan/Muhenkan
-  // {.key = B_SHFTL           , .kana = SS_TAP(X_INT5)},
-  // {.key = B_SHFTR           , .kana = SS_TAP(X_INT4)},
-
   // 左シフト
   {.key = B_SHFTL|B_Q       , .kana = "za"},
   {.key = B_SHFTL|B_W       , .kana = "e"},
@@ -534,8 +548,8 @@ const PROGMEM nicola_keymap ngmap[] = {
 
   // 右シフト
   {.key = B_SHFTR|B_Q       , .kana = "xxx"},
-  {.key = B_SHFTR|B_W       , .kana = "xxx"},
-  {.key = B_SHFTR|B_E       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_W       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_E       , .kana = "xxx"},
   {.key = B_SHFTR|B_R       , .kana = "xxx"},
   {.key = B_SHFTR|B_T       , .kana = "xxx"},
   {.key = B_SHFTR|B_Y       , .kana = "mitai"},
@@ -549,13 +563,12 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTR|B_D       , .kana = "ke"},
   {.key = B_SHFTR|B_F       , .kana = "yu"},
   {.key = B_SHFTR|B_G       , .kana = "tu"},
-  {.key = B_SHFTR|B_H       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_H       , .kana = "xxx"},
   {.key = B_SHFTR|B_J       , .kana = "xxx"},
   {.key = B_SHFTR|B_K       , .kana = "xxx"},
   {.key = B_SHFTR|B_L       , .kana = "xxx"},
   {.key = B_SHFTR|B_SCLN    , .kana = "site"},
 
-  // {.key = B_SHFTR|B_Z       , .kana = "pu"},
   {.key = B_SHFTR|B_X       , .kana = "gu"},
   {.key = B_SHFTR|B_C       , .kana = "be"},
   {.key = B_SHFTR|B_V       , .kana = "bo"},
@@ -569,7 +582,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTR|B_1       , .kana = "di"},
   {.key = B_SHFTR|B_2       , .kana = "vu"},
   {.key = B_SHFTR|B_3       , .kana = "po"},
-  {.key = B_SHFTR|B_4       , .kana = "xxx"},
+  {.key = B_SHFTR|B_4       , .kana = "pe"},
   {.key = B_SHFTR|B_5       , .kana = "xxx"},
   {.key = B_SHFTR|B_6       , .kana = "&"},
   {.key = B_SHFTR|B_7       , .kana = "nu"},
@@ -615,45 +628,40 @@ bool nicola_state(void) {
 void nicola_type(void) {
   nicola_keymap bngmap; // PROGMEM buffer
 
-  // bool douji = false; // 同時押しか連続押しか
-  // uint64_t skey = 0; // 連続押しの場合のバッファ
-
   switch (keycomb) {
+    case B_K|B_N|B_D:
+      send_string("kakuninn");
+      break;
+    case B_S|B_K|B_O:
+      send_string("sukosi");
+      break;
     // send_stringできないキー、長すぎるマクロはここで定義
-    // case B_F|B_G:
-    //   nicola_off();
-    //   break;
+    // 月配列（E / 英語）
+    case B_SHFTR|B_E:
+      set_oneshot_layer(5, ONESHOT_START);
+      break;
+    // 月配列（W / 仕事用語）
+    case B_SHFTR|B_W:
+      set_oneshot_layer(6, ONESHOT_START);
+      break;
+    // 月配列（H / 人称）
+    case B_SHFTR|B_H:
+      set_oneshot_layer(7, ONESHOT_START);
+      break;
     default:
       // キーから仮名に変換して出力する。
       // 同時押しの場合 ngmapに定義されている
       for (int i = 0; i < sizeof ngmap / sizeof bngmap; i++) {
         memcpy_P(&bngmap, &ngmap[i], sizeof(bngmap));
         if (keycomb == bngmap.key) {
-          // douji = true;
           send_string(bngmap.kana);
           break;
         }
       }
-      // // 連続押しの場合 ngmapに定義されていない
-      // if (!douji) {
-      //   for (int j = 0; j < ng_chrcount; j++) {
-      //     skey = ng_key[ninputs[j] - NG_Q];
-      //     if ((keycomb & B_SHFTL) > 0) skey |= B_SHFTL; // シフトキー状態を反映
-      //     if ((keycomb & B_SHFTR) > 0) skey |= B_SHFTR; // シフトキー状態を反映
-      //     for (int i = 0; i < sizeof ngmap / sizeof bngmap; i++) {
-      //       memcpy_P(&bngmap, &ngmap[i], sizeof(bngmap));
-      //       if (skey == bngmap.key) {
-      //         send_string(bngmap.kana);
-      //         break;
-      //       }
-      //     }
-      //   }
-      // }
   }
 
   nicola_clear(); // バッファを空にする
 }
-
 
 // modifierが押されたら薙刀式レイヤーをオフしてベースレイヤーに戻す
 // get_mods()がうまく動かない
@@ -702,17 +710,22 @@ void nicola_clear(void) {
 }
 
 // 親指シフトの入力処理
+bool wait_flag_three = false;
 bool process_nicola(uint64_t keycode, keyrecord_t *record) {
-  // if (!is_nicola || n_modifier > 0) return true;
-
   if (record->event.pressed) {
     switch (keycode) {
       case NG_Q ... NG_SHFTR:
         ninputs[ng_chrcount] = keycode; // キー入力をバッファに貯める
         ng_chrcount++;
         keycomb |= ng_key[keycode - NG_Q]; // キーの重ね合わせ
-        // 2文字押したら処理を開始
+        // 2つのキーが入力されたら、3キー目の入力を1入力ぶん待つ
+        if (ng_chrcount == 2 && !wait_flag_three) {
+          wait_flag_three = true;
+          return false;
+        }
+        // 2文字以上押したら処理を開始
         if (ng_chrcount > 1) {
+          wait_flag_three = false;
           nicola_type();
         }
         return false;
