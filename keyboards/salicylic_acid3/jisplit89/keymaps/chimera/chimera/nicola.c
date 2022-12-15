@@ -341,7 +341,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_S|B_SLSH         , .kana = "sure"},
 
   {.key = B_T|B_O         , .kana = "toka"},
-  {.key = B_T|B_P         , .kana = "tyu"},
+  // {.key = B_T|B_P         , .kana = "tyu"},
   {.key = B_T|B_AT        , .kana = "tya"},
   {.key = B_T|B_H         , .kana = "tuu"},
   {.key = B_T|B_J         , .kana = "deta"},
@@ -416,7 +416,6 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SCLN|B_1      , .kana = "!"},
   {.key = B_SCLN|B_2      , .kana = "?"},
 
-  // 用語 or 登場人物
   // {.key = B_BSLS|B_1      , .kana = "kyuu"},
   // {.key = B_BSLS|B_2      , .kana = "kyou"},
   // {.key = B_BSLS|B_3      , .kana = "kya"},
@@ -428,7 +427,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   // {.key = B_BSLS|B_R      , .kana = "tyou"},
   // {.key = B_BSLS|B_T      , .kana = "tyo"},
   // {.key = B_BSLS|B_A      , .kana = "byuu"},
-  // {.key = B_BSLS|B_S      , .kana = "byou"},
+  {.key = B_BSLS|B_S      , .kana = "settei"},
   // {.key = B_BSLS|B_D      , .kana = "hyou"},
   // {.key = B_BSLS|B_F      , .kana = "hyuu"},
   // {.key = B_BSLS|B_G      , .kana = "rya"},
@@ -875,6 +874,11 @@ void nicola_type(void) {
     case B_J|B_L|B_F:
       send_string("wareru");
       break;
+    // ・
+    case B_T|B_P:
+      send_string("/");
+      SEND_STRING(SS_TAP(X_ENTER));
+      break;
     // ——
     case B_J|B_K|B_Q:
       send_string("bo");
@@ -978,6 +982,9 @@ void nicola_type(void) {
     case B_J|B_S|B_O:
       send_string("shon");
       break;
+    case B_S|B_M|B_SHFTR:
+      send_string("sms");
+      break;
     default:
       // キーから仮名に変換して出力する。
       // 同時押しの場合 ngmapに定義されている
@@ -994,8 +1001,6 @@ void nicola_type(void) {
             set_oneshot_layer(5, ONESHOT_START);
             return;
           }
-
-
           send_string(bngmap.kana);
           break;
         }

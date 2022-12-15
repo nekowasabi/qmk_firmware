@@ -362,38 +362,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case TK_LFT_Q ... TK_LFT_BSLS:
       if (record->event.pressed) {
-        if (keycode == TK_LFT_H) send_string("tyekku");
+        if (keycode == TK_LFT_H) send_string("hrkr");
         if (keycode == TK_LFT_I) send_string("itada");
-        if (keycode == TK_LFT_M) {
-          send_string("mkk");
-          SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
-        }
-        if (keycode == TK_LFT_P) {
-          send_string("nakaguro");
-          SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER));
-        }
+        if (keycode == TK_LFT_O) send_string("qngq"); // おねがい
+        if (keycode == TK_LFT_P) send_string("itasi");
         if (keycode == TK_LFT_Q) {
-          send_string("bo");
-          SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER));
         }
-        if (keycode == TK_LFT_S) send_string("itasi");
-        if (keycode == TK_LFT_T) {
-          SEND_STRING("ten" SS_TAP(X_SPACE) SS_TAP(X_ENTER));
-        }
+        if (keycode == TK_LFT_S) send_string("sprt");
+        if (keycode == TK_LFT_T) send_string("tyekku");
      if (keycode == TK_LFT_Y) send_string("dekiruyouni");
         if (keycode == TK_LFT_Z) send_string("pa");
         if (keycode == TK_LFT_SCLN) {
-          send_string("ikako");
-          SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
         }
         if (keycode == TK_LFT_COLN) {
-          send_string("nikako");
-          SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
         }
         layer_off(_TK_LFT);
       } else {
         layer_off(_TK_LFT);
       }
+      nicola_clear();
       return false;
       break;
     case TK_RGT_Q ... TK_RGT_BSLS:
@@ -403,6 +390,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         layer_off(_TK_RGT);
       }
+      nicola_clear();
       return false;
       break;
 
