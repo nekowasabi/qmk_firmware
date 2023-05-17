@@ -371,10 +371,10 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_W|B_J      , .kana = "wari"},
   {.key = B_W|B_L      , .kana = "wake"},  
 
-  {.key = B_X|B_7      , .kana = "suu"},
-  {.key = B_X|B_8      , .kana = "huu"},
-  {.key = B_X|B_9      , .kana = "bou"},
-  {.key = B_X|B_0      , .kana = "zuu"},
+  {.key = B_X|B_7      , .kana = "zuu"},
+  {.key = B_X|B_8      , .kana = "suu"},
+  {.key = B_X|B_9      , .kana = "huu"},
+  {.key = B_X|B_0      , .kana = "bou"},
   {.key = B_X|B_Y      , .kana = "guu"},
   {.key = B_X|B_U      , .kana = "mou"},
   {.key = B_X|B_I      , .kana = "kuu"},
@@ -1016,22 +1016,22 @@ static int n_modifier = 0;
 
 bool process_modifier(uint64_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case CTL_T(0x01) ... CTL_T(0xFE):
     case KC_LCTRL:
     case KC_LSHIFT:
-    case KC_LALT:
     case KC_LGUI:
     case KC_RCTRL:
     case KC_RSHIFT:
     case KC_RALT:
     case KC_RGUI:
-    case LCTL_T(0x01) ... LCTL_T(0xFFFFFFFFFFFFFFFF):
-    case LSFT_T(0x01) ... LSFT_T(0xFFFFFFFFFFFFFFFF):
-    case LALT_T(0x01) ... LALT_T(0xFFFFFFFFFFFFFFFF):
-    case LGUI_T(0x01) ... LGUI_T(0xFFFFFFFFFFFFFFFF):
-    case RCTL_T(0x01) ... RCTL_T(0xFFFFFFFFFFFFFFFF):
-    case RSFT_T(0x01) ... RSFT_T(0xFFFFFFFFFFFFFFFF):
-    case RALT_T(0x01) ... RALT_T(0xFFFFFFFFFFFFFFFF):
-    case RGUI_T(0x01) ... RGUI_T(0xFFFFFFFFFFFFFFFF):
+    // case LCTL_T(0x01) ... LCTL_T(0xFFFFFFFFFFFFFFFF):
+    // case LSFT_T(0x01) ... LSFT_T(0xFFFFFFFFFFFFFFFF):
+    // case LALT_T(0x01) ... LALT_T(0xFFFFFFFFFFFFFFFF):
+    // case LGUI_T(0x01) ... LGUI_T(0xFFFFFFFFFFFFFFFF):
+    // case RCTL_T(0x01) ... RCTL_T(0xFFFFFFFFFFFFFFFF):
+    // case RSFT_T(0x01) ... RSFT_T(0xFFFFFFFFFFFFFFFF):
+    // case RALT_T(0x01) ... RALT_T(0xFFFFFFFFFFFFFFFF):
+    // case RGUI_T(0x01) ... RGUI_T(0xFFFFFFFFFFFFFFFF):
       if (record->event.pressed) {
         n_modifier++;
         layer_off(nicola_layer);
@@ -1042,6 +1042,11 @@ bool process_modifier(uint64_t keycode, keyrecord_t *record) {
         }
       }
       return true;
+      break;
+  }
+  switch (keycode) {
+    case KC_LALT:
+      nicola_off();
       break;
   }
   return false;

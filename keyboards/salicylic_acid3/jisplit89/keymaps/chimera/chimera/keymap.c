@@ -359,16 +359,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-
+      
     case TK_LFT_Q ... TK_LFT_BSLS:
       if (record->event.pressed) {
+        if (keycode == TK_LFT_C) send_string("cdrv");
         if (keycode == TK_LFT_H) send_string("hrkr");
         if (keycode == TK_LFT_I) send_string("itada");
         if (keycode == TK_LFT_O) send_string("qngq"); // おねがい
         if (keycode == TK_LFT_P) send_string("itasi");
         if (keycode == TK_LFT_Q) {
         }
-        if (keycode == TK_LFT_S) send_string("sprt");
         if (keycode == TK_LFT_T) send_string("tyekku");
      if (keycode == TK_LFT_Y) send_string("dekiruyouni");
         if (keycode == TK_LFT_Z) send_string("pa");
@@ -386,6 +386,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TK_RGT_Q ... TK_RGT_BSLS:
       if (record->event.pressed) {
         if (keycode == TK_RGT_BSLS) send_string("rasii");
+        if (keycode == TK_RGT_D) send_string("kudasai");
         layer_off(_TK_RGT);
       } else {
         layer_off(_TK_RGT);
