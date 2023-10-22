@@ -19,13 +19,7 @@
 #include "nicola.h"
 #include <unistd.h>
 
-#if !defined(__AVR__)
-  #include <string.h>
-  #define memcpy_P(des, src, len) memcpy(des, src, len)
-#endif
-
-#define NGBUFFER 50 // バッファのサイズ
-
+#define NGBUFFER 30 // バッファのサイズ
 
 static uint8_t ng_chrcount = 0; // 文字キー入力のカウンタ (シフトキー含む)
 static bool is_nicola = false; // 親指シフトがオンかオフか
@@ -161,8 +155,6 @@ typedef struct {
 
 const PROGMEM nicola_keymap ngmap[] = {
   // 同時
-  {.key = B_S|B_D|B_F       , .kana = "aaaaaaaaa"},
-
   {.key = B_A|B_9           , .kana = "atari"},
   {.key = B_A|B_Y           , .kana = "atte"},
   {.key = B_A|B_U           , .kana = "atta"},
@@ -175,6 +167,8 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_A|B_L           , .kana = "juu"},
   {.key = B_A|B_SCLN        , .kana = "jou"},
   {.key = B_A|B_COLN        , .kana = "ano"},
+  {.key = B_A|B_COMM        , .kana = "simatta"},
+  {.key = B_A|B_DOT         , .kana = "simatte"},
 
   {.key = B_C|B_V           , .kana = "youni"},
 
@@ -237,6 +231,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_I|B_O            , .kana = "nai"},
   {.key = B_I|B_B            , .kana = "ireba"},
 
+  {.key = B_J|B_B            , .kana = "junbi"},
   {.key = B_J|B_I            , .kana = "teru"},
   {.key = B_J|B_O            , .kana = "siyou"},
   {.key = B_J|B_P            , .kana = "miyou"},
@@ -257,11 +252,11 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_K|B_J            , .kana = "iru"},
   {.key = B_K|B_L            , .kana = "suru"},
   {.key = B_K|B_SCLN         , .kana = "konai"},
-  {.key = B_K|B_X            , .kana = "kita"},
-  {.key = B_K|B_C            , .kana = "kite"},
+  {.key = B_K|B_Z            , .kana = "kita"},
+  {.key = B_K|B_X            , .kana = "kite"},
   {.key = B_K|B_B            , .kana = "kuru"},
   {.key = B_K|B_M            , .kana = "mae"},
-  {.key = B_K|B_N            , .kana = "kakuninn"},
+  {.key = B_K|B_N            , .kana = "noka"},
 
   {.key = B_L|B_SCLN         , .kana = "inai"},
 
@@ -283,7 +278,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_N|B_3            , .kana = "naka"},
   {.key = B_N|B_4            , .kana = "nou"},
   {.key = B_N|B_5            , .kana = "donnna"},
-  {.key = B_N|B_Q            , .kana = "nakatta"},
+  {.key = B_N|B_Q            , .kana = ";n"},
   {.key = B_N|B_W            , .kana = "natta"},
   {.key = B_N|B_E            , .kana = "natte"},
   {.key = B_N|B_R            , .kana = "naru"},
@@ -347,7 +342,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_S|B_SLSH         , .kana = "sure"},
 
   {.key = B_T|B_O         , .kana = "toka"},
-  {.key = B_T|B_P         , .kana = "tyu"},
+  // {.key = B_T|B_P         , .kana = "tyu"},
   {.key = B_T|B_AT        , .kana = "tya"},
   {.key = B_T|B_H         , .kana = "tuu"},
   {.key = B_T|B_J         , .kana = "deta"},
@@ -377,10 +372,10 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_W|B_J      , .kana = "wari"},
   {.key = B_W|B_L      , .kana = "wake"},
 
-  {.key = B_X|B_7      , .kana = "suu"},
-  {.key = B_X|B_8      , .kana = "huu"},
-  {.key = B_X|B_9      , .kana = "bou"},
-  {.key = B_X|B_0      , .kana = "zuu"},
+  {.key = B_X|B_7      , .kana = "zuu"},
+  {.key = B_X|B_8      , .kana = "suu"},
+  {.key = B_X|B_9      , .kana = "huu"},
+  {.key = B_X|B_0      , .kana = "bou"},
   {.key = B_X|B_Y      , .kana = "guu"},
   {.key = B_X|B_U      , .kana = "mou"},
   {.key = B_X|B_I      , .kana = "kuu"},
@@ -411,34 +406,36 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_Y|B_T      , .kana = "tyotto"},
   {.key = B_Y|B_O      , .kana = "yarukoto"},
 
+  {.key = B_Z|B_K      , .kana = "uuuuuuuu"},
+
   {.key = B_COMM|B_W      , .kana = "reta"},
   {.key = B_COMM|B_E      , .kana = "rete"},
-  // {.key = B_COMM|B_Z      , .kana = "meta"},
+  {.key = B_COMM|B_Z      , .kana = "meta"},
   {.key = B_COMM|B_X      , .kana = "mete"},
   {.key = B_COMM|B_C      , .kana = "meru"},
 
   {.key = B_SCLN|B_1      , .kana = "!"},
   {.key = B_SCLN|B_2      , .kana = "?"},
 
-  {.key = B_BSLS|B_1      , .kana = "kyuu"},
-  {.key = B_BSLS|B_2      , .kana = "kyou"},
-  {.key = B_BSLS|B_3      , .kana = "kya"},
-  {.key = B_BSLS|B_4      , .kana = "kyu"},
-  {.key = B_BSLS|B_5      , .kana = "kyo"},
-  {.key = B_BSLS|B_Q      , .kana = "myuu"},
-  {.key = B_BSLS|B_W      , .kana = "myou"},
-  {.key = B_BSLS|B_E      , .kana = "tyuu"},
-  {.key = B_BSLS|B_R      , .kana = "tyou"},
-  {.key = B_BSLS|B_T      , .kana = "tyo"},
-  {.key = B_BSLS|B_A      , .kana = "byuu"},
-  {.key = B_BSLS|B_S      , .kana = "byou"},
-  {.key = B_BSLS|B_D      , .kana = "hyou"},
-  {.key = B_BSLS|B_F      , .kana = "hyuu"},
-  {.key = B_BSLS|B_G      , .kana = "rya"},
-  {.key = B_BSLS|B_X      , .kana = "gyuu"},
-  {.key = B_BSLS|B_C      , .kana = "gyou"},
-  {.key = B_BSLS|B_V      , .kana = "nyuu"},
-  {.key = B_BSLS|B_B      , .kana = "nyou"},
+  // {.key = B_BSLS|B_1      , .kana = "kyuu"},
+  // {.key = B_BSLS|B_2      , .kana = "kyou"},
+  // {.key = B_BSLS|B_3      , .kana = "kya"},
+  // {.key = B_BSLS|B_4      , .kana = "kyu"},
+  // {.key = B_BSLS|B_5      , .kana = "kyo"},
+  // {.key = B_BSLS|B_Q      , .kana = "myuu"},
+  // {.key = B_BSLS|B_W      , .kana = "myou"},
+  // {.key = B_BSLS|B_E      , .kana = "tyuu"},
+  // {.key = B_BSLS|B_R      , .kana = "tyou"},
+  // {.key = B_BSLS|B_T      , .kana = "tyo"},
+  // {.key = B_BSLS|B_A      , .kana = "byuu"},
+  {.key = B_BSLS|B_S      , .kana = "settei"},
+  // {.key = B_BSLS|B_D      , .kana = "hyou"},
+  // {.key = B_BSLS|B_F      , .kana = "hyuu"},
+  // {.key = B_BSLS|B_G      , .kana = "rya"},
+  // {.key = B_BSLS|B_X      , .kana = "gyuu"},
+  // {.key = B_BSLS|B_C      , .kana = "gyou"},
+  // {.key = B_BSLS|B_V      , .kana = "nyuu"},
+  // {.key = B_BSLS|B_B      , .kana = "nyou"},
 
   // 単独
   {.key = B_Q               , .kana = "na"},
@@ -463,7 +460,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_L               , .kana = "ka"},
   {.key = B_SCLN            , .kana = "ta"},
 
-  // {.key = B_Z               , .kana = "xxx"},
+  {.key = B_Z               , .kana = "xxx"},
   {.key = B_X               , .kana = "ni"},
   {.key = B_C               , .kana = "do"},
   {.key = B_V               , .kana = "ku"},
@@ -476,8 +473,8 @@ const PROGMEM nicola_keymap ngmap[] = {
 
   {.key = B_1               , .kana = "pi"},
   {.key = B_2               , .kana = "bi"},
-  {.key = B_3               , .kana = "ti"},
-  {.key = B_4               , .kana = "ze"},
+  // {.key = B_3               , .kana = "ti"},
+  // {.key = B_4               , .kana = "ze"},
   {.key = B_5               , .kana = "pu"},
   {.key = B_6               , .kana = "xxx"},
   {.key = B_7               , .kana = "du"},
@@ -518,7 +515,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTL|B_L       , .kana = "hu"},
   {.key = B_SHFTL|B_SCLN    , .kana = "de"},
 
-  // {.key = B_SHFTL|B_Z       , .kana = "ze"},
+  {.key = B_SHFTL|B_Z       , .kana = "ze"},
   {.key = B_SHFTL|B_X       , .kana = "hi"},
   {.key = B_SHFTL|B_C       , .kana = "se"},
   {.key = B_SHFTL|B_V       , .kana = "ba"},
@@ -539,7 +536,6 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTL|B_8       , .kana = "8"},
   {.key = B_SHFTL|B_9       , .kana = "9"},
   {.key = B_SHFTL|B_0       , .kana = "0"},
-
   {.key = B_SHFTL|B_AT      , .kana = "pu"},
   {.key = B_SHFTL|B_LBRC    , .kana = "ze"},
   {.key = B_SHFTL|B_COLN    , .kana = "tto"},
@@ -547,11 +543,11 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTL|B_BSLS    , .kana = "ete"},
 
   // 右シフト
-  {.key = B_SHFTR|B_Q       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_Q       , .kana = "xxx"},
   // {.key = B_SHFTR|B_W       , .kana = "xxx"},
   // {.key = B_SHFTR|B_E       , .kana = "xxx"},
-  {.key = B_SHFTR|B_R       , .kana = "xxx"},
-  {.key = B_SHFTR|B_T       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_R       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_T       , .kana = "xxx"},
   {.key = B_SHFTR|B_Y       , .kana = "mitai"},
   {.key = B_SHFTR|B_U       , .kana = "gi"},
   {.key = B_SHFTR|B_I       , .kana = "so"},
@@ -564,9 +560,9 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTR|B_F       , .kana = "yu"},
   {.key = B_SHFTR|B_G       , .kana = "tu"},
   // {.key = B_SHFTR|B_H       , .kana = "xxx"},
-  {.key = B_SHFTR|B_J       , .kana = "xxx"},
-  {.key = B_SHFTR|B_K       , .kana = "xxx"},
-  {.key = B_SHFTR|B_L       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_J       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_K       , .kana = "xxx"},
+  // {.key = B_SHFTR|B_L       , .kana = "xxx"},
   {.key = B_SHFTR|B_SCLN    , .kana = "site"},
 
   {.key = B_SHFTR|B_X       , .kana = "gu"},
@@ -604,6 +600,9 @@ void set_nicola(uint8_t layer) {
   nicola_layer = layer;
 }
 
+// 3打鍵のレイヤーフラグ
+bool wait_flag_three = false;
+
 // 親指シフトをオンオフ
 void nicola_on(void) {
   is_nicola = true;
@@ -627,26 +626,364 @@ bool nicola_state(void) {
 // キー入力を文字に変換して出力する
 void nicola_type(void) {
   nicola_keymap bngmap; // PROGMEM buffer
-
   switch (keycomb) {
-    case B_K|B_N|B_D:
-      send_string("kakuninn");
+    // 4delete
+    case B_3:
+      SEND_STRING(SS_TAP(X_DELETE) SS_TAP(X_DELETE) SS_TAP(X_DELETE) SS_TAP(X_DELETE) SS_TAP(X_DELETE));
       break;
-    case B_S|B_K|B_O:
-      send_string("sukosi");
+    // 4backspace
+    // case B_4:
+    //   SEND_STRING(SS_TAP(X_BSPACE) SS_TAP(X_BSPACE) SS_TAP(X_BSPACE) SS_TAP(X_BSPACE) SS_TAP(X_BSPACE));
+    //   break;
+    // home
+    case B_SHFTR|B_Q:
+      tap_code(KC_HOME);
       break;
-    // send_stringできないキー、長すぎるマクロはここで定義
-    // 月配列（E / 英語）
-    case B_SHFTR|B_E:
-      set_oneshot_layer(5, ONESHOT_START);
+    // end
+    case B_SHFTR|B_T:
+      tap_code(KC_END);
       break;
-    // 月配列（W / 仕事用語）
+    // word left
     case B_SHFTR|B_W:
-      set_oneshot_layer(6, ONESHOT_START);
+      SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_UP(X_LCTL));
       break;
-    // 月配列（H / 人称）
+    // word right
+    case B_SHFTR|B_R:
+      SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_UP(X_LCTL));
+      break;
+    // delete
+    case B_SHFTR|B_E:
+      SEND_STRING(SS_TAP(X_DELETE));
+      break;
+    // left
     case B_SHFTR|B_H:
-      set_oneshot_layer(7, ONESHOT_START);
+      SEND_STRING(SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+      break;
+    // down
+    case B_SHFTR|B_J:
+      SEND_STRING(SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN));
+      break;
+    // up
+    case B_SHFTR|B_K:
+      SEND_STRING(SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP) SS_TAP(X_UP));
+      break;
+    // right
+    case B_SHFTR|B_L:
+      SEND_STRING(SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT));
+      break;
+    // 同時押し
+    // case B_SHFTR|B_I|B_O:
+    //   send_string("idou");
+    //   break;
+    // case B_SHFTR|B_D|B_N:
+    //   send_string("dhzz");
+    //   break;
+    // // いろいろ
+    // case B_SHFTR|B_I|B_R:
+    //   send_string(";r;r");
+    //   break;
+    // // ほんとう
+    // case B_SHFTR|B_H|B_T:
+    //   send_string("hztz");
+    //   break;
+    // // そういう
+    // case B_SHFTR|B_S|B_I|B_I:
+    //   send_string("sqz;");
+    //   break;
+    // // いつも
+    // case B_SHFTR|B_I|B_T:
+    //   send_string("qtm");
+    //   break;
+    // // けいぞく
+    // case B_SHFTR|B_K|B_Z:
+    //   send_string("kqzk");
+    //   break;
+    // case B_SHFTR|B_I|B_G:
+    //   send_string("igai");
+    //   break;
+    // // ながら
+    // case B_SHFTR|B_N|B_G:
+    //   send_string("ngr");
+    //   break;
+    // case B_SHFTR|B_A|B_I:
+    //   send_string("aida");
+    //   break;
+    // case B_K|B_N|B_D:
+    //   send_string("kakuninn");
+    //   break;
+    // case B_S|B_K|B_O:
+    //   send_string("sukosi");
+    //   break;
+    // そろそろ
+    case B_SHFTR|B_S|B_P:
+      send_string("srsr");
+      break;
+    // // ながれ
+    // case B_SHFTR|B_N|B_R:
+    //   send_string("ngq");
+    //   break;
+    // わたし
+    case B_SHFTR|B_W|B_L:
+      send_string("wq");
+      break;
+    // されていた
+    case B_S|B_D|B_U:
+      send_string("srtt");
+      break;
+    // されていて
+    case B_S|B_D|B_I:
+      send_string("srti");
+      break;
+    // されている
+    case B_S|B_D|B_O:
+      send_string("srtr");
+      break;
+    // // していた
+    // case B_S|B_D|B_J:
+    //   send_string("stt");
+    //   break;
+    // // していて
+    // case B_S|B_D|B_K:
+    //   send_string("stiq");
+    //   break;
+    // // している
+    // case B_S|B_D|B_L:
+    //   send_string("stir");
+    //   break;
+    // // っていた
+    // case B_S|B_D|B_N:
+    //   send_string("ttit");
+    //   break;
+    // // っていて
+    // case B_S|B_D|B_M:
+    //   send_string("ttiq");
+    //   break;
+    // // っている
+    // case B_S|B_D|B_COMM:
+    //   send_string("ttir");
+    //   break;
+    // // つづけた
+    // case B_8|B_9|B_W:
+    //   send_string("tuduketa");
+    //   break;
+    // // つづけて
+    // case B_8|B_9|B_E:
+    //   send_string("tudukete");
+    //   break;
+    // // つづける
+    // case B_8|B_9|B_R:
+    //   send_string("tudukeru");
+    //   break;
+    // // つづく
+    // case B_8|B_9|B_A:
+    //   send_string("tuduku");
+    //   break;
+    // // つづいた
+    // case B_8|B_9|B_S:
+    //   send_string("tuduita");
+    //   break;
+    // // つづいて
+    // case B_8|B_9|B_D:
+    //   send_string("tuduite");
+    //   break;
+    // // つづく
+    // case B_8|B_9|B_F:
+    //   send_string("tuduku");
+    //   break;
+    // すぎた
+    case B_S|B_D|B_8:
+      send_string("sgt");
+      break;
+    // すぎて
+    case B_S|B_D|B_9:
+      send_string("sgq");
+      break;
+    // すぎる
+    case B_S|B_D|B_0:
+      send_string("sgr");
+      break;
+    // ことができた
+    case B_K|B_O|B_2:
+      send_string("kotogadekita");
+      break;
+    // ことができて
+    case B_K|B_O|B_3:
+      send_string("kotogadekite");
+      break;
+    // ことができる
+    case B_K|B_O|B_4:
+      send_string("kotogadekiru");
+      break;
+    // こうどう
+    case B_K|B_O|B_D:
+      send_string("koudou");
+      break;
+    // おもしろ
+    case B_O|B_M|B_S:
+      send_string("omosiro");
+      break;
+    // おもい
+    case B_O|B_M|B_Q:
+      send_string("omoi");
+      break;
+    // おもった
+    case B_O|B_M|B_W:
+      send_string("omotta");
+      break;
+    // おもって
+    case B_O|B_M|B_E:
+      send_string("omotte");
+      break;
+    // おもう
+    case B_O|B_M|B_R:
+      send_string("omou");
+      break;
+    // ていた
+    case B_J|B_I|B_S:
+      send_string("teita");
+      break;
+    // ていて
+    case B_J|B_I|B_D:
+      send_string("teite");
+      break;
+    // ている
+    case B_J|B_I|B_F:
+      send_string("teiru");
+      break;
+    // られる
+    case B_J|B_L|B_W:
+      send_string("rareru");
+      break;
+    // られて
+    case B_J|B_L|B_E:
+      send_string("rarete");
+      break;
+    // られた
+    case B_J|B_L|B_R:
+      send_string("rareta");
+      break;
+    // われた
+    case B_J|B_L|B_S:
+      send_string("wareta");
+      break;
+    // われて
+    case B_J|B_L|B_D:
+      send_string("warete");
+      break;
+    // われる
+    case B_J|B_L|B_F:
+      send_string("wareru");
+      break;
+    // ・
+    case B_T|B_P:
+      send_string("/");
+      SEND_STRING(SS_TAP(X_ENTER));
+      break;
+    // ——
+    case B_J|B_K|B_Q:
+      send_string("bo");
+      SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER));
+      break;
+    // …
+    case B_J|B_K|B_W:
+      SEND_STRING("ten" SS_TAP(X_SPACE) SS_TAP(X_ENTER));
+      break;
+    // ()
+    case B_J|B_K|B_A:
+      SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_8) SS_TAP(X_9) SS_UP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
+      break;
+    // 「」
+    case B_K|B_L|B_A:
+      send_string("ikako");
+      SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
+      break;
+    // 『』
+    case B_K|B_L|B_Q:
+      send_string("nikako");
+      SEND_STRING(SS_TAP(X_SPACE) SS_TAP(X_ENTER) SS_TAP(X_LEFT));
+      break;
+    // こんだ
+    case B_J|B_K|B_S:
+      send_string("konda");
+      break;
+    // こんで
+    case B_J|B_K|B_D:
+      send_string("konde");
+      break;
+    // こむ
+    case B_J|B_K|B_F:
+      send_string("komu");
+      break;
+    // かんじ
+    case B_K|B_N|B_J:
+      send_string("kanji");
+      break;
+    // みょう
+    case B_I|B_O|B_Q:
+      send_string("myou");
+      break;
+    // みゅう
+    case B_I|B_O|B_W:
+      send_string("myuu");
+      break;
+    // びょう
+    case B_I|B_O|B_A:
+      send_string("byou");
+      break;
+    // びゅう
+    case B_I|B_O|B_S:
+      send_string("byuu");
+      break;
+    // ひょう
+    case B_I|B_O|B_D:
+      send_string("hyou");
+      break;
+    // ひゅう
+    case B_I|B_O|B_F:
+      send_string("hyuu");
+      break;
+    // ぎょう
+    case B_I|B_O|B_Z:
+      send_string("gyou");
+      break;
+    // ぎゅう
+    case B_I|B_O|B_X:
+      send_string("gyuu");
+      break;
+    // にょう
+    case B_I|B_O|B_C:
+      send_string("nyou");
+      break;
+    // にゅう
+    case B_I|B_O|B_V:
+      send_string("nyuu");
+      break;
+    // // れていた
+    // case B_E|B_R|B_J:
+    //   send_string("reteta");
+    //   break;
+    // // れていて
+    // case B_E|B_R|B_K:
+    //   send_string("reteite");
+    //   break;
+    // // れている
+    // case B_E|B_R|B_L:
+    //   send_string("reteiru");
+    //   break;
+    // おしまい
+    case B_A|B_M|B_O:
+      send_string("osimai");
+      break;
+    // こんな
+    case B_A|B_K|B_N:
+      send_string("konna");
+      break;
+    // しょん
+    case B_J|B_S|B_O:
+      send_string("shon");
+      break;
+    case B_S|B_M|B_SHFTR:
+      send_string("sms");
       break;
     default:
       // キーから仮名に変換して出力する。
@@ -654,6 +991,16 @@ void nicola_type(void) {
       for (int i = 0; i < sizeof ngmap / sizeof bngmap; i++) {
         memcpy_P(&bngmap, &ngmap[i], sizeof(bngmap));
         if (keycomb == bngmap.key) {
+          // 月配列（Z）
+          if (bngmap.key == B_Z)  {
+            set_oneshot_layer(4, ONESHOT_START);
+            return;
+          }
+          // 月配列（_）
+          if (bngmap.key == B_BSLS)  {
+            set_oneshot_layer(5, ONESHOT_START);
+            return;
+          }
           send_string(bngmap.kana);
           break;
         }
@@ -669,22 +1016,22 @@ static int n_modifier = 0;
 
 bool process_modifier(uint64_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    // case KC_LCTRL:
-    // case KC_LSHIFT:
-    case KC_LALT:
+    case CTL_T(0x01) ... CTL_T(0xFE):
+    case KC_LCTL:
+    case KC_LSFT:
     case KC_LGUI:
-    // case KC_RCTRL:
-    // case KC_RSHIFT:
+    case KC_RCTL:
+    case KC_RSFT:
     case KC_RALT:
     case KC_RGUI:
-    case LCTL_T(0x01) ... LCTL_T(0xFFFFFFFFFFFFFFFF):
-    case LSFT_T(0x01) ... LSFT_T(0xFFFFFFFFFFFFFFFF):
-    case LALT_T(0x01) ... LALT_T(0xFFFFFFFFFFFFFFFF):
-    case LGUI_T(0x01) ... LGUI_T(0xFFFFFFFFFFFFFFFF):
-    case RCTL_T(0x01) ... RCTL_T(0xFFFFFFFFFFFFFFFF):
-    case RSFT_T(0x01) ... RSFT_T(0xFFFFFFFFFFFFFFFF):
-    case RALT_T(0x01) ... RALT_T(0xFFFFFFFFFFFFFFFF):
-    case RGUI_T(0x01) ... RGUI_T(0xFFFFFFFFFFFFFFFF):
+    // case LCTL_T(0x01) ... LCTL_T(0xFFFFFFFFFFFFFFFF):
+    // case LSFT_T(0x01) ... LSFT_T(0xFFFFFFFFFFFFFFFF):
+    // case LALT_T(0x01) ... LALT_T(0xFFFFFFFFFFFFFFFF):
+    // case LGUI_T(0x01) ... LGUI_T(0xFFFFFFFFFFFFFFFF):
+    // case RCTL_T(0x01) ... RCTL_T(0xFFFFFFFFFFFFFFFF):
+    // case RSFT_T(0x01) ... RSFT_T(0xFFFFFFFFFFFFFFFF):
+    // case RALT_T(0x01) ... RALT_T(0xFFFFFFFFFFFFFFFF):
+    // case RGUI_T(0x01) ... RGUI_T(0xFFFFFFFFFFFFFFFF):
       if (record->event.pressed) {
         n_modifier++;
         layer_off(nicola_layer);
@@ -695,6 +1042,11 @@ bool process_modifier(uint64_t keycode, keyrecord_t *record) {
         }
       }
       return true;
+      break;
+  }
+  switch (keycode) {
+    case KC_LALT:
+      nicola_off();
       break;
   }
   return false;
@@ -710,7 +1062,6 @@ void nicola_clear(void) {
 }
 
 // 親指シフトの入力処理
-bool wait_flag_three = false;
 bool process_nicola(uint64_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
@@ -725,9 +1076,9 @@ bool process_nicola(uint64_t keycode, keyrecord_t *record) {
         }
         // 2文字以上押したら処理を開始
         if (ng_chrcount > 1) {
-          wait_flag_three = false;
           nicola_type();
         }
+        wait_flag_three = false;
         return false;
         break;
     }
@@ -739,10 +1090,10 @@ bool process_nicola(uint64_t keycode, keyrecord_t *record) {
           nicola_type();
         }
         keycomb &= ~ng_key[keycode - NG_Q]; // キーの重ね合わせ
+        wait_flag_three = false;
         return false;
         break;
     }
   }
   return true;
 }
-
