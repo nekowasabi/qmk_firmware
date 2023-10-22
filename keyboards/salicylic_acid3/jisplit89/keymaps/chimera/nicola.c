@@ -376,7 +376,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_W|B_H      , .kana = "wara"},
   {.key = B_W|B_J      , .kana = "wari"},
   {.key = B_W|B_L      , .kana = "wake"},
-  
+
   {.key = B_X|B_7      , .kana = "suu"},
   {.key = B_X|B_8      , .kana = "huu"},
   {.key = B_X|B_9      , .kana = "bou"},
@@ -439,7 +439,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_BSLS|B_C      , .kana = "gyou"},
   {.key = B_BSLS|B_V      , .kana = "nyuu"},
   {.key = B_BSLS|B_B      , .kana = "nyou"},
-                                                         
+
   // 単独
   {.key = B_Q               , .kana = "na"},
   {.key = B_W               , .kana = "ra"},
@@ -578,7 +578,7 @@ const PROGMEM nicola_keymap ngmap[] = {
   {.key = B_SHFTR|B_COMM    , .kana = "desu"},
   {.key = B_SHFTR|B_DOT     , .kana = "mo"},
   {.key = B_SHFTR|B_SLSH    , .kana = "tou"},
-  
+
   {.key = B_SHFTR|B_1       , .kana = "di"},
   {.key = B_SHFTR|B_2       , .kana = "vu"},
   {.key = B_SHFTR|B_3       , .kana = "po"},
@@ -669,12 +669,12 @@ static int n_modifier = 0;
 
 bool process_modifier(uint64_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_LCTRL:
-    case KC_LSHIFT:
+    // case KC_LCTRL:
+    // case KC_LSHIFT:
     case KC_LALT:
     case KC_LGUI:
-    case KC_RCTRL:
-    case KC_RSHIFT:
+    // case KC_RCTRL:
+    // case KC_RSHIFT:
     case KC_RALT:
     case KC_RGUI:
     case LCTL_T(0x01) ... LCTL_T(0xFFFFFFFFFFFFFFFF):
