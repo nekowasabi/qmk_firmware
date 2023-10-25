@@ -19,21 +19,14 @@
 #define LAYER_STATE_16BIT
 
 #define TAP_CODE_DELAY 1
-#define TAPPING_TERM 200
+#define TAPPING_TERM 150
 
-// #undef PRODUCT
-// #define PRODUCT Jisplit89
-//
-// #undef LOCKING_SUPPORT_ENABLE
-// #undef LOCKING_RESYNC_ENABLE
-//
-//
-// #define MASTER_LEFT
-// #define MASTER_RIGHT
-//
-// // #define RETRO_TAPPING
-// // #define PERMISSIVE_HOLD
-//
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+
+#define MASTER_LEFT
+#define MASTER_RIGHT
+
 #define USB_MAX_POWER_CONSUMPTION 100
 
 // RGB Settings.

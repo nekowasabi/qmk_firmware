@@ -83,7 +83,6 @@ static uint64_t keycomb = 0UL; // 同時押しの状態を示す。32bitの各�
 #define B_SHFTL (1ULL<<45)
 #define B_SHFTR (1ULL<<46)
 
-
 // 文字入力バッファ
 static uint16_t ninputs[NGBUFFER];
 
@@ -672,56 +671,56 @@ void nicola_type(void) {
       SEND_STRING(SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT) SS_TAP(X_RIGHT));
       break;
     // 同時押し
-    // case B_SHFTR|B_I|B_O:
-    //   send_string("idou");
-    //   break;
-    // case B_SHFTR|B_D|B_N:
-    //   send_string("dhzz");
-    //   break;
-    // // いろいろ
-    // case B_SHFTR|B_I|B_R:
-    //   send_string(";r;r");
-    //   break;
-    // // ほんとう
-    // case B_SHFTR|B_H|B_T:
-    //   send_string("hztz");
-    //   break;
-    // // そういう
-    // case B_SHFTR|B_S|B_I|B_I:
-    //   send_string("sqz;");
-    //   break;
-    // // いつも
-    // case B_SHFTR|B_I|B_T:
-    //   send_string("qtm");
-    //   break;
-    // // けいぞく
-    // case B_SHFTR|B_K|B_Z:
-    //   send_string("kqzk");
-    //   break;
-    // case B_SHFTR|B_I|B_G:
-    //   send_string("igai");
-    //   break;
-    // // ながら
-    // case B_SHFTR|B_N|B_G:
-    //   send_string("ngr");
-    //   break;
-    // case B_SHFTR|B_A|B_I:
-    //   send_string("aida");
-    //   break;
-    // case B_K|B_N|B_D:
-    //   send_string("kakuninn");
-    //   break;
-    // case B_S|B_K|B_O:
-    //   send_string("sukosi");
-    //   break;
+    case B_SHFTR|B_I|B_O:
+      send_string("idou");
+      break;
+    case B_SHFTR|B_D|B_N:
+      send_string("dhzz");
+      break;
+    // いろいろ
+    case B_SHFTR|B_I|B_R:
+      send_string(";r;r");
+      break;
+    // ほんとう
+    case B_SHFTR|B_H|B_T:
+      send_string("hztz");
+      break;
+    // そういう
+    case B_SHFTR|B_S|B_I|B_I:
+      send_string("sqz;");
+      break;
+    // いつも
+    case B_SHFTR|B_I|B_T:
+      send_string("qtm");
+      break;
+    // けいぞく
+    case B_SHFTR|B_K|B_Z:
+      send_string("kqzk");
+      break;
+    case B_SHFTR|B_I|B_G:
+      send_string("igai");
+      break;
+    // ながら
+    case B_SHFTR|B_N|B_G:
+      send_string("ngr");
+      break;
+    case B_SHFTR|B_A|B_I:
+      send_string("aida");
+      break;
+    case B_K|B_N|B_D:
+      send_string("kakuninn");
+      break;
+    case B_S|B_K|B_O:
+      send_string("sukosi");
+      break;
     // そろそろ
     case B_SHFTR|B_S|B_P:
       send_string("srsr");
       break;
-    // // ながれ
-    // case B_SHFTR|B_N|B_R:
-    //   send_string("ngq");
-    //   break;
+    // ながれ
+    case B_SHFTR|B_N|B_R:
+      send_string("ngq");
+      break;
     // わたし
     case B_SHFTR|B_W|B_L:
       send_string("wq");
@@ -738,58 +737,58 @@ void nicola_type(void) {
     case B_S|B_D|B_O:
       send_string("srtr");
       break;
-    // // していた
-    // case B_S|B_D|B_J:
-    //   send_string("stt");
-    //   break;
-    // // していて
-    // case B_S|B_D|B_K:
-    //   send_string("stiq");
-    //   break;
-    // // している
-    // case B_S|B_D|B_L:
-    //   send_string("stir");
-    //   break;
-    // // っていた
-    // case B_S|B_D|B_N:
-    //   send_string("ttit");
-    //   break;
-    // // っていて
-    // case B_S|B_D|B_M:
-    //   send_string("ttiq");
-    //   break;
-    // // っている
-    // case B_S|B_D|B_COMM:
-    //   send_string("ttir");
-    //   break;
-    // // つづけた
-    // case B_8|B_9|B_W:
-    //   send_string("tuduketa");
-    //   break;
-    // // つづけて
-    // case B_8|B_9|B_E:
-    //   send_string("tudukete");
-    //   break;
-    // // つづける
-    // case B_8|B_9|B_R:
-    //   send_string("tudukeru");
-    //   break;
-    // // つづく
-    // case B_8|B_9|B_A:
-    //   send_string("tuduku");
-    //   break;
-    // // つづいた
-    // case B_8|B_9|B_S:
-    //   send_string("tuduita");
-    //   break;
-    // // つづいて
-    // case B_8|B_9|B_D:
-    //   send_string("tuduite");
-    //   break;
-    // // つづく
-    // case B_8|B_9|B_F:
-    //   send_string("tuduku");
-    //   break;
+    // していた
+    case B_S|B_D|B_J:
+      send_string("stt");
+      break;
+    // していて
+    case B_S|B_D|B_K:
+      send_string("stiq");
+      break;
+    // している
+    case B_S|B_D|B_L:
+      send_string("stir");
+      break;
+    // っていた
+    case B_S|B_D|B_N:
+      send_string("ttit");
+      break;
+    // っていて
+    case B_S|B_D|B_M:
+      send_string("ttiq");
+      break;
+    // っている
+    case B_S|B_D|B_COMM:
+      send_string("ttir");
+      break;
+    // つづけた
+    case B_8|B_9|B_W:
+      send_string("tuduketa");
+      break;
+    // つづけて
+    case B_8|B_9|B_E:
+      send_string("tudukete");
+      break;
+    // つづける
+    case B_8|B_9|B_R:
+      send_string("tudukeru");
+      break;
+    // つづく
+    case B_8|B_9|B_A:
+      send_string("tuduku");
+      break;
+    // つづいた
+    case B_8|B_9|B_S:
+      send_string("tuduita");
+      break;
+    // つづいて
+    case B_8|B_9|B_D:
+      send_string("tuduite");
+      break;
+    // つづく
+    case B_8|B_9|B_F:
+      send_string("tuduku");
+      break;
     // すぎた
     case B_S|B_D|B_8:
       send_string("sgt");
@@ -958,18 +957,18 @@ void nicola_type(void) {
     case B_I|B_O|B_V:
       send_string("nyuu");
       break;
-    // // れていた
-    // case B_E|B_R|B_J:
-    //   send_string("reteta");
-    //   break;
-    // // れていて
-    // case B_E|B_R|B_K:
-    //   send_string("reteite");
-    //   break;
-    // // れている
-    // case B_E|B_R|B_L:
-    //   send_string("reteiru");
-    //   break;
+    // れていた
+    case B_E|B_R|B_J:
+      send_string("reteta");
+      break;
+    // れていて
+    case B_E|B_R|B_K:
+      send_string("reteite");
+      break;
+    // れている
+    case B_E|B_R|B_L:
+      send_string("reteiru");
+      break;
     // おしまい
     case B_A|B_M|B_O:
       send_string("osimai");
@@ -1010,46 +1009,31 @@ void nicola_type(void) {
   nicola_clear(); // バッファを空にする
 }
 
-// modifierが押されたら薙刀式レイヤーをオフしてベースレイヤーに戻す
-// get_mods()がうまく動かない
 static int n_modifier = 0;
 
 bool process_modifier(uint64_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case CTL_T(0x01) ... CTL_T(0xFE):
-    case KC_LCTL:
-    case KC_LSFT:
-    case KC_LGUI:
-    case KC_RCTL:
-    case KC_RSFT:
-    case KC_RALT:
-    case KC_RGUI:
-    // case LCTL_T(0x01) ... LCTL_T(0xFFFFFFFFFFFFFFFF):
-    // case LSFT_T(0x01) ... LSFT_T(0xFFFFFFFFFFFFFFFF):
-    // case LALT_T(0x01) ... LALT_T(0xFFFFFFFFFFFFFFFF):
-    // case LGUI_T(0x01) ... LGUI_T(0xFFFFFFFFFFFFFFFF):
-    // case RCTL_T(0x01) ... RCTL_T(0xFFFFFFFFFFFFFFFF):
-    // case RSFT_T(0x01) ... RSFT_T(0xFFFFFFFFFFFFFFFF):
-    // case RALT_T(0x01) ... RALT_T(0xFFFFFFFFFFFFFFFF):
-    // case RGUI_T(0x01) ... RGUI_T(0xFFFFFFFFFFFFFFFF):
-      if (record->event.pressed) {
-        n_modifier++;
-        layer_off(nicola_layer);
-      } else {
-        n_modifier--;
-        if (n_modifier == 0) {
-          layer_on(nicola_layer);
-        }
-      }
-      return true;
-      break;
-  }
-  switch (keycode) {
-    case KC_LALT:
-      nicola_off();
-      break;
-  }
-  return false;
+    switch (keycode) {
+        case CTL_T(0x01) ... CTL_T(0xFE):
+        case KC_LCTL:
+        case KC_LSFT:
+        case KC_LGUI:
+        case KC_RCTL:
+        case KC_RGUI:
+            if (record->event.pressed) {
+                n_modifier++;
+                layer_off(nicola_layer);
+            } else {
+                n_modifier--;
+                if (n_modifier == 0) {
+                    layer_on(nicola_layer);
+                }
+            }
+            return true;
+        case KC_LALT:
+            nicola_off();
+            return false;
+    }
+    return false;
 }
 
 // バッファをクリアする
@@ -1063,37 +1047,37 @@ void nicola_clear(void) {
 
 // 親指シフトの入力処理
 bool process_nicola(uint64_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    switch (keycode) {
-      case NG_Q ... NG_SHFTR:
-        ninputs[ng_chrcount] = keycode; // キー入力をバッファに貯める
-        ng_chrcount++;
-        keycomb |= ng_key[keycode - NG_Q]; // キーの重ね合わせ
-        // 2つのキーが入力されたら、3キー目の入力を1入力ぶん待つ
-        if (ng_chrcount == 2 && !wait_flag_three) {
-          wait_flag_three = true;
-          return false;
-        }
-        // 2文字以上押したら処理を開始
-        if (ng_chrcount > 1) {
-          nicola_type();
-        }
-        wait_flag_three = false;
-        return false;
-        break;
-    }
-  } else { // key release
-    switch (keycode) {
-      case NG_Q ... NG_SHFTR:
-        // 2文字入力していなくても、どれかキーを離したら処理を開始する
-        if (ng_chrcount > 0) {
-          nicola_type();
-        }
-        keycomb &= ~ng_key[keycode - NG_Q]; // キーの重ね合わせ
-        wait_flag_three = false;
-        return false;
-        break;
-    }
+  // キーコードが範囲内でなければ、即座にtrueを返す
+  if (keycode < NG_Q || keycode > NG_SHFTR) {
+    return true;
   }
-  return true;
+
+  if (record->event.pressed) {
+    ninputs[ng_chrcount] = keycode;  // キー入力をバッファに貯める
+    ng_chrcount++;
+    keycomb |= ng_key[keycode - NG_Q];  // キーの重ね合わせ
+
+    // 2つのキーが入力されたら、3キー目の入力を1入力ぶん待つ
+    if (ng_chrcount == 2 && !wait_flag_three) {
+      wait_flag_three = true;
+      return false;
+    }
+
+    // 2文字以上押したら処理を開始
+    if (ng_chrcount > 1) {
+      nicola_type();
+    }
+
+    wait_flag_three = false;
+    return false;
+  } else {  // key release
+    // 2文字入力していなくても、どれかキーを離したら処理を開始する
+    if (ng_chrcount > 0) {
+      nicola_type();
+    }
+
+    keycomb &= ~ng_key[keycode - NG_Q];  // キーの重ね合わせを解除
+    wait_flag_three = false;
+    return false;
+  }
 }

@@ -266,7 +266,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
       KC_O_OFF,   NG_A,    NG_S,    NG_D,    NG_F,    NG_G,        NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, NG_COLN, NG_RBRC,           KC_END,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      KC_LSFT,   OSL(_TK_LFT),    NG_X,    NG_C,    NG_V,    NG_B,        NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, NG_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
+      KC_LSFT,   NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,        NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, NG_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
       //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
       KC_LCTL, KC_LGUI, KC_LALT,   KC_LCTL,  NG_SHFTL, KC_O_MOD, NG_SHFTR,  LCTL_T(KC_ENT), KC_BSPC, KC_DEL,  KC_O_OFF,          KC_LEFT, KC_DOWN,KC_RIGHT
       //`-----------------------------------------------------|   |--------------------------------------------------------------------------------'
@@ -372,9 +372,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_LCTL, KC_LGUI, KC_LALT,   KC_LCTL,  KC_O_MOD_INPUT,  KC_O_MOD,    KC_SPC,  LCTL_T(KC_ENT), KC_BSPC, JP_KANA,  KC_O_TOGGL,   KC_LEFT,  KC_DOWN,  KC_RIGHT
       //`----------------------------------------------------------|   |--------------------------------------------------------------------------------'
       )
-
-
-
 };
 
 void persistent_default_layer_set(uint16_t default_layer) {
