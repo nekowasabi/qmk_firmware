@@ -1013,20 +1013,22 @@ static int n_modifier = 0;
 
 bool process_modifier(uint64_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CTL_T(0x01) ... CTL_T(0xFE):
         case KC_LCTL:
         case KC_LSFT:
         case KC_LGUI:
         case KC_RCTL:
         case KC_RGUI:
+        case CTL_T(0x01) ... CTL_T(0xFE):
             if (record->event.pressed) {
                 n_modifier++;
                 layer_off(nicola_layer);
             } else {
-                n_modifier--;
-                if (n_modifier == 0) {
-                    layer_on(nicola_layer);
-                }
+                // n_modifier--;
+                // if (n_modifier == 0) {
+                //     layer_on(nicola_layer);
+                // }
+                layer_on(nicola_layer);
+                n_modifier = 0;
             }
             return true;
         case KC_LALT:
