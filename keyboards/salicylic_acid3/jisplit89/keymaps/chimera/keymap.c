@@ -15,15 +15,12 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    */
 
+#include "keycodes.h"
 #include QMK_KEYBOARD_H
 #include "keymap_japanese.h"
 #include "nicola.h"
 
 NGKEYS nicola_keys;
-
-// #include "keycode.h"
-// #include "quantum_keycodes.h"
-// #include "keycode_legacy.h"
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -51,6 +48,8 @@ enum custom_keycodes {
   KC_VIM_OFF,
   KC_WORD_LEFT,
   KC_WORD_RIGHT,
+  KC_WORD_SELECT_LEFT,
+  KC_WORD_SELECT_RIGHT,
 
   TK_LFT_Q,
   TK_LFT_W,
@@ -248,7 +247,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   JP_AT, JP_LBRC,  KC_ENT, KC_HOME,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_O_TOGGL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, JP_SCLN, JP_COLN, JP_RBRC,           KC_END,
+      KC_O_TOGGL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, JP_SCLN, JP_COLN, JP_RBRC,           KC_RSFT,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, JP_BSLS, KC_PGDN,   KC_UP, KC_PGUP,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
@@ -294,7 +293,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
       JP_ZKHK,  KC_1,  KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, JP_MINS, JP_CIRC,  JP_YEN, KC_BSPC,  KC_DEL,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
-      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_HOME,    KC_PGUP,    KC_O,    KC_P,   JP_AT, JP_LBRC,  KC_ENT, KC_HOME,
+      KC_TAB,    KC_Q,    KC_WORD_SELECT_LEFT,    KC_WORD_SELECT_RIGHT,    KC_R,    KC_T,        KC_Y,    KC_HOME,    KC_PGUP,    KC_O,    KC_P,   JP_AT, JP_LBRC,  KC_ENT, KC_HOME,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
       KC_CAPS,    LSFT(KC_LEFT),    LSFT(KC_DOWN),    LSFT(KC_UP),    LSFT(KC_RIGHT),    KC_VIM_OFF,        KC_LEFT,    KC_DOWN,    KC_UP,    KC_RIGHT, KC_WORD_LEFT, KC_WORD_RIGHT, JP_RBRC,           KC_END,
       //|---------+---------+---------+---------+---------+--------|   |---------+---------+---------+---------+---------+---------+---------+---------+--------|
@@ -442,6 +441,51 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code(KC_LCTL);
         }
       }
+      return false;
+      break;
+    case KC_WORD_SELECT_LEFT:
+      if (record->event.pressed) {
+        if (nicola_state() == true) {
+          nicola_off();
+          register_code(KC_LCTL);
+          register_code(KC_LSFT);
+          register_code(KC_LEFT);
+          unregister_code(KC_LEFT);
+          unregister_code(KC_LSFT);
+          unregister_code(KC_LCTL);
+          register_code(KC_LCTL);
+          register_code(KC_LSFT);
+          register_code(KC_LEFT);
+          unregister_code(KC_LEFT);
+          unregister_code(KC_LSFT);
+          unregister_code(KC_LCTL);
+        } else {
+          nicola_on();
+        }
+      }
+      return false;
+      break;
+    case KC_WORD_SELECT_RIGHT:
+      if (record->event.pressed) {
+        if (nicola_state() == true) {
+          nicola_off();
+          register_code(KC_LCTL);
+          register_code(KC_LSFT);
+          register_code(KC_RIGHT);
+          unregister_code(KC_RIGHT);
+          unregister_code(KC_LSFT);
+          unregister_code(KC_LCTL);
+          register_code(KC_LCTL);
+          register_code(KC_LSFT);
+          register_code(KC_RIGHT);
+          unregister_code(KC_RIGHT);
+          unregister_code(KC_LSFT);
+          unregister_code(KC_LCTL);
+        } else {
+          nicola_on();
+        }
+      }
+
       return false;
       break;
 
