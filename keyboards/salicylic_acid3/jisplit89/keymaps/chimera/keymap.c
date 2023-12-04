@@ -445,54 +445,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case KC_WORD_SELECT_LEFT:
       if (record->event.pressed) {
-        if (nicola_state() == true) {
-          nicola_off();
           register_code(KC_LCTL);
           register_code(KC_LSFT);
           register_code(KC_LEFT);
+      } else {
           unregister_code(KC_LEFT);
           unregister_code(KC_LSFT);
           unregister_code(KC_LCTL);
-          register_code(KC_LCTL);
-          register_code(KC_LSFT);
-          register_code(KC_LEFT);
-          unregister_code(KC_LEFT);
-          unregister_code(KC_LSFT);
-          unregister_code(KC_LCTL);
-        } else {
-          nicola_on();
-        }
       }
       return false;
       break;
     case KC_WORD_SELECT_RIGHT:
       if (record->event.pressed) {
-        if (nicola_state() == true) {
           nicola_off();
           register_code(KC_LCTL);
           register_code(KC_LSFT);
           register_code(KC_RIGHT);
-          unregister_code(KC_RIGHT);
-          unregister_code(KC_LSFT);
-          unregister_code(KC_LCTL);
-          register_code(KC_LCTL);
-          register_code(KC_LSFT);
-          register_code(KC_RIGHT);
-          unregister_code(KC_RIGHT);
-          unregister_code(KC_LSFT);
-          unregister_code(KC_LCTL);
-        } else {
+      } else {
           nicola_on();
-        }
+          unregister_code(KC_RIGHT);
+          unregister_code(KC_LSFT);
+          unregister_code(KC_LCTL);
       }
-
       return false;
       break;
 
     // case MOD_:
     //   if (record->event.pressed) {
     //     nicola_on();
-    //     // tap_code(JP_ZKHK);
+    //     // tap_code(JP_ZKHK)
     //   }
     //   return false;
     //   break;
@@ -1867,7 +1848,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
     case TK_H_DOT:
-      if (record->event.pressed) {
+      if (rcord->event.pressed) {
       } else {
         layer_off(_TK_H);
       }
